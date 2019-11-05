@@ -1,0 +1,64 @@
+<!--
+	essa partial irá conter a cópia da marcação que lista as fotos no index.html
+-->
+
+ <!--class jumbotron está sendo estilizada pelo bootstrap-->
+<div class="jumbotron">
+    <h1 class="text-center">Alurapic</h1>
+</div> <!--jumbotron-->
+<!--
+    pequena alteração no src e no alt para começar a enteder como o Angular fornece os dados para a nossa view
+    e como a mesma se constrói apartir desses dados.
+
+    foi aberta algumas "lacunas" na view index.html através da sintaxe {{}}
+    todo conteúdo presente em {{}} em Angular, é conhecido como AE ou Angular Expression
+
+    aqui já estamos adotando todo um template já pronto e so precisa preencher as "lacunas" que foi
+    comentado
+
+    MVC -> consiste em separar as tarefas, facilitando assim a reescrita de alguma parte e a manutenção do código.
+
+    No Modelo MVC(Model View Controller), o controller é responsável por disponibilizar dados para a(s) view(s)
+
+-->
+
+
+<!-- novidade, a row com o campo de busca -->
+<div class="row">
+    <div class="col-md-12">
+        <form>
+            <!--
+                para realizar um pequeno delay na entrada gerada pelo usuário, iremos utilizar o ng-model-options, 
+                com um total de 500ms paras que o framework atualize o valor do $scope.filtro e filtre a lista em si
+            -->
+            <input class="form-control" placeholder="filtrar pelo título da imagem." ng-model="filtro" ng-model-options="{ debounce: 500 }">
+        </form>
+    </div> <!--col-md-12--> 
+</div> <!--row-->
+
+<div class="row-painel">
+    <div class="row">
+
+        <!--
+            adequando nossa view de acordo com a diretiva que criamos....
+            notamos que foi colocado a diretiva ng-repeat para repetir a diretiva
+            de acordo com a quantidade de fotos.
+
+            o filtro é aplicado em todas as propriedade do objeto foto de nossa lista, 
+            sendo assim, podemos encontrar uma foto pelo seu título, descrção ou 
+            o que for...
+
+            todo momento que o usuário digitar neste campo, a propriedade $scope.filtro
+            será atualizada...
+
+            a diretiva ng-repeat aceita receber um filtro através da propriedade filter e senso assim que
+            será utilziado o valor corrente de @scope.filtro para filtrar as fotos.
+
+        -->
+
+        <meu-painel class="col-md-2 painel-animado" ng-repeat="foto in fotos | filter: filtro" titulo="{{foto.titulo}}">
+            <img class="img-responsive center-block" src="{{foto.url}}" alt="{{foto.titulo}}">
+        </meu-painel>
+        
+    </div> <!--row-->
+</div> <!--row-painel-->

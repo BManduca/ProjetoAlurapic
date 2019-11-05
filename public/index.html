@@ -1,0 +1,52 @@
+<!-- public/index.html -->
+<!DOCTYPE html>
+<!--
+    ao carregar a página pela primeira vez o Angular irá encontrar o atributo
+    e carregar o mósulo alurapic, tudo isso de modo automatico, porém, precisa importar
+    o arquivo main.js
+-->
+<html lang="pt-br" ng-app="alurapic">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width">
+        <title>Alurapic</title>
+        <!--
+            bootstrap aplica um visual mais profissional ao projeto, apenas adicionando classes
+            no arquivo css
+        -->
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/bootstrap-theme.min.css">
+        <link rel="stylesheet" href="css/design.css">
+        <link rel="stylesheet" href="css/efeitos.css">
+        <script src="js/lib/angular.min.js"></script>
+        <!-- importando o módulo ngAnimate -->
+        <script src="js/lib/angular-animate.min.js"></script>
+        <script src="js/lib/angular-route.min.js"></script>
+        <script Src="js/main.js"></script>
+        <script src="js/controllers/fotos-controller.js"></script>
+        <script src="js/directives/minhas-diretivas.js"></script>
+    </head>
+    <!--
+        para as informações serem carregadas precisamos indicar qual fragmento do código 
+        vai ser gerenciado pelo controller, o angular permite associar diferentes controllers
+        para diferentes partes da nossa view, sendo uma maneira de separar as responsabilidades
+
+        para isso usamos a diretiva "ng-controller", que deve ter o nome exato do controller que criamos
+
+        configurando as rotas -> as rotas são configuradas com auxílio do módulo ngRoute. como sempre, isso envolve a impotação de um script e uma adição do módulo 
+            como dependência do módulo principal da aplicação...
+    -->
+    <body>
+        <div class="container">
+            
+            <!--
+                substituimos todo o conteudo que foi colocado em pricipal.html
+                pela diretiva ng-view e tambem removemos a diretiva ng-controller da tag body
+            -->
+            <ng-view>
+                
+            </ng-view>
+
+        </div> <!-- container -->        
+    </body>
+</html>
