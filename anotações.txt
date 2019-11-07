@@ -1,0 +1,2 @@
+Angular tem como foco a criação de Single Page Applications (SPA's), porém seu uso não é exclusivo para este tipo de aplicação. Uma SPA é aquela aplicação que não recarrega durante seu uso. No caso do Angular, há um sistema de rotas que funciona no lado do cliente capaz de carregar do servidor fragmentos de páginas, chamadas de partials (parciais). Esses fragmentos são inseridos na página principal da aplicação.
+

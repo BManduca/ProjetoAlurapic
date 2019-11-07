@@ -1,5 +1,5 @@
 <!--
-	essa partial irá conter a cópia da marcação que lista as fotos no index.html
+    essa partial irá conter a cópia da marcação que lista as fotos no index.html
 -->
 
  <!--class jumbotron está sendo estilizada pelo bootstrap-->
@@ -27,38 +27,58 @@
 <div class="row">
     <div class="col-md-12">
         <form>
+
             <!--
-                para realizar um pequeno delay na entrada gerada pelo usuário, iremos utilizar o ng-model-options, 
-                com um total de 500ms paras que o framework atualize o valor do $scope.filtro e filtre a lista em si
+                novidade -> vamos adicionar um botão estilisado graças ao bootstrap
+
+                com essa funcionalidade, iremos agrupar o botão de nova foto com o campo de pesquisa
+                dentro de um input-group do Bootstrap, inclusive, o botão decora o campo de pesquisa
+                através da classe input-group-btn
+
             -->
-            <input class="form-control" placeholder="filtrar pelo título da imagem." ng-model="filtro" ng-model-options="{ debounce: 500 }">
+            <div class="input-group">
+                <span class="input-group-btn">
+                    <a href="/fotos/new" class="btn btn-primary" type="button">
+                        Nova Foto
+                    </a>
+                </span>
+
+                <!--
+                    para realizar um pequeno delay na entrada gerada pelo usuário, iremos utilizar o ng-model-options, 
+                    com um total de 500ms paras que o framework atualize o valor do $scope.filtro e filtre a lista em si
+                -->
+
+                <input class="form-control" placeholder="filtrar pelo título da imagem. " ng-model="filtro" ng-model-options="{ debounce: 500 }">
+            </div>
         </form>
     </div> <!--col-md-12--> 
 </div> <!--row-->
 
-<div class="row-painel">
-    <div class="row">
+<div class="row">
 
-        <!--
-            adequando nossa view de acordo com a diretiva que criamos....
-            notamos que foi colocado a diretiva ng-repeat para repetir a diretiva
-            de acordo com a quantidade de fotos.
+    <!--
+        adequando nossa view de acordo com a diretiva que criamos....
+        notamos que foi colocado a diretiva ng-repeat para repetir a diretiva
+        de acordo com a quantidade de fotos.
 
-            o filtro é aplicado em todas as propriedade do objeto foto de nossa lista, 
-            sendo assim, podemos encontrar uma foto pelo seu título, descrção ou 
-            o que for...
+        o filtro é aplicado em todas as propriedade do objeto foto de nossa lista, 
+        sendo assim, podemos encontrar uma foto pelo seu título, descrção ou 
+        o que for...
 
-            todo momento que o usuário digitar neste campo, a propriedade $scope.filtro
-            será atualizada...
+        todo momento que o usuário digitar neste campo, a propriedade $scope.filtro
+        será atualizada...
 
-            a diretiva ng-repeat aceita receber um filtro através da propriedade filter e senso assim que
-            será utilziado o valor corrente de @scope.filtro para filtrar as fotos.
-
-        -->
+        a diretiva ng-repeat aceita receber um filtro através da propriedade filter e senso assim que
+        será utilziado o valor corrente de @scope.filtro para filtrar as fotos.
 
         <meu-painel class="col-md-2 painel-animado" ng-repeat="foto in fotos | filter: filtro" titulo="{{foto.titulo}}">
             <img class="img-responsive center-block" src="{{foto.url}}" alt="{{foto.titulo}}">
         </meu-painel>
-        
-    </div> <!--row-->
-</div> <!--row-painel-->
+
+    -->
+
+     <meu-painel class="col-md-2 painel-animado" ng-repeat="foto in fotos | filter: filtro" titulo="{{foto.titulo}}">
+            <minha-foto url="{{foto.url}}" alt="{{foto.titulo}}"></minha-foto>
+     </meu-painel>
+    
+</div> <!--row-->

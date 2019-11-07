@@ -7,6 +7,7 @@
 -->
 <html lang="pt-br" ng-app="alurapic">
     <head>
+        <base href="/">
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width">
         <title>Alurapic</title>
@@ -24,6 +25,8 @@
         <script src="js/lib/angular-route.min.js"></script>
         <script Src="js/main.js"></script>
         <script src="js/controllers/fotos-controller.js"></script>
+        <!--novo controler foto-controller-->
+        <script src="js/controllers/foto-controller.js"></script>
         <script src="js/directives/minhas-diretivas.js"></script>
     </head>
     <!--
@@ -37,8 +40,7 @@
             como dependência do módulo principal da aplicação...
     -->
     <body>
-        <div class="container">
-            
+        <div class="container">     
             <!--
                 substituimos todo o conteudo que foi colocado em pricipal.html
                 pela diretiva ng-view e tambem removemos a diretiva ng-controller da tag body

@@ -1,0 +1,69 @@
+
+<div class="page-header text-center">
+	<h1>{{foto.titulo}}</h1> <!---AE para alimentar a informação de titulo das novas fotos-->
+</div>
+
+<!-- 
+	a ng-submit chama uma função que precisa ser definida na propriedade $scope.submeter 
+	desta forma, vamos adiciona-lá no controller...
+
+	com o atributo novalidate, fazemos com que o angular tome conta da validação
+	do formulário... automaticamente o poder de validação do html5 é 
+	abdicado...
+-->
+<form novalidate name="formulario" class="row" ng-submit="submeter()"> 
+	<div class="col-md-6">
+
+		<div class="form-group">
+
+			<label>Título</label>
+			<input name="titulo" class="form-control" ng-model="foto.titulo" required>
+		</div>
+
+		<!-- 
+			Para a validação de campo ocorrer somente quando for submetido, 
+			iremos adicionar mais uma verificação - - > formulario.$submitted, que irá
+			retornar verdadeiro quando for submetido ou seja...so ativa a verificação
+			assim que o botão enviar for acionado.
+		 -->
+		<span ng-show="formulario.$submitted && formulario.titulo.$error.required" class="form-control alert-danger">
+			Título obrigatório!!
+		</span>
+
+		<div class="form-group">
+			<label>URL</label>
+			<input name="url" class="form-control" ng-model="foto.url" required>
+		</div>
+
+		<div class="form-group">
+			<label>Descrição</label>
+			<textarea name="descricao" class="form-control" ng-model="foto.descricao"></textarea>
+		</div>
+
+		<!--
+			implementando o botão salvar...
+			para submeter o formulario...mas antes precisamos acessar o 
+			$scope.foto no momento da submissão para que 
+			os dados possam ser enviados de maneira assíncrona(sem relação com tempo e 
+			espaço...ou seja, o comunicado e o receptor podem manter contato
+			enquanto tiverem "tempo" disponível..) através do serviço $http
+
+			O JS possui o evento submit justamente para fazer essa submissão
+
+			O Angular suporta a interface de eventos do JS através de diretivas...como a situação a seguir... 
+			se ocorrer algum 'problema' na submissão, como por exemplo um campo não preenchido, podemos adicionar uma função que permite a execução de um código arbitrário que pode cancelar sua submissão...
+			Se quisermos o evento click, por exemplo, usamos a diretiva ng-click, o evento mouseover, 
+			a diretiva ng-mouseover e assim por diante...
+
+			como sequencia...para o evento submit -> diretiva ng-submit diretamente na tag form..
+		-->
+		<button type="submit" class="btn btn-primary">
+			Salvar
+		</button>
+		<a href="/" class="btn btn-primary">Voltar</a>
+		<hr>
+	</div>
+	<div class="col-md-6">
+		<minha-foto></minha-foto>
+	</div>
+</form>
