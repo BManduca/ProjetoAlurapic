@@ -3,6 +3,10 @@
 	<h1>{{foto.titulo}}</h1> <!---AE para alimentar a informação de titulo das novas fotos-->
 </div>
 
+<!-- Aqui será exibida para o usuário uma mensagem... -->
+
+<p ng-show="mensagem.length" class="alert alert-info">{{mensagem}}</p>
+
 <!-- 
 	a ng-submit chama uma função que precisa ser definida na propriedade $scope.submeter 
 	desta forma, vamos adiciona-lá no controller...
@@ -17,22 +21,39 @@
 		<div class="form-group">
 
 			<label>Título</label>
-			<input name="titulo" class="form-control" ng-model="foto.titulo" required>
-		</div>
+			<input name="titulo" class="form-control" ng-model="foto.titulo" required ng-maxlength="20">
 
-		<!-- 
-			Para a validação de campo ocorrer somente quando for submetido, 
-			iremos adicionar mais uma verificação - - > formulario.$submitted, que irá
-			retornar verdadeiro quando for submetido ou seja...so ativa a verificação
-			assim que o botão enviar for acionado.
-		 -->
-		<span ng-show="formulario.$submitted && formulario.titulo.$error.required" class="form-control alert-danger">
-			Título obrigatório!!
-		</span>
+			<!-- 
+				Para a validação de campo ocorrer somente quando for submetido, 
+				iremos adicionar mais uma verificação - - > formulario.$submitted, que irá
+				retornar verdadeiro quando for submetido ou seja...so ativa a verificação
+				assim que o botão enviar for acionado.
+
+				Se quisermos que a validação seja realizada apenas quando o formulário for submetido, precisamos colocar uma condição E consultando o estado do formulário para saber se ele foi submetido ou não
+			 -->
+			<span ng-show="formulario.$submitted && formulario.titulo.$error.required" class="form-control alert-danger">
+				Título obrigatório!!
+			</span>
+
+			<!--
+				considerando a validação de que o campo título não pode passar de 20 caracteres...
+				através da diretiva ng-maxlength
+			-->
+
+			<span ng-show="formulario.$submitted && formulario.titulo.$error.maxlength" class="form-control alert-danger">
+				No máximo 20 caracteres.
+			</span>
+
+		</div>
 
 		<div class="form-group">
 			<label>URL</label>
 			<input name="url" class="form-control" ng-model="foto.url" required>
+
+			<span ng-show="formulario.$submitted && formulario.url.$error.required" class="form-control alert-danger">
+				URL obrigatória!!
+			</span>
+
 		</div>
 
 		<div class="form-group">
@@ -57,13 +78,23 @@
 
 			como sequencia...para o evento submit -> diretiva ng-submit diretamente na tag form..
 		-->
-		<button type="submit" class="btn btn-primary">
+
+		<button type="submit" class="btn btn-primary" ng-disabled="formulario.$invalid">
 			Salvar
 		</button>
+
+		<button type="reset" class="btn btn-secondary">
+			Reset
+		</button>
+
 		<a href="/" class="btn btn-primary">Voltar</a>
 		<hr>
 	</div>
+
+	<!-- binding da url da foto com nossa diretiva minha-foto -->
 	<div class="col-md-6">
-		<minha-foto></minha-foto>
+		<minha-foto url="{{foto.url}}" titulo="{{foto.titulo}}">
+			
+		</minha-foto>
 	</div>
 </form>

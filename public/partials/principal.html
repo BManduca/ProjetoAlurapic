@@ -6,6 +6,11 @@
 <div class="jumbotron">
     <h1 class="text-center">Alurapic</h1>
 </div> <!--jumbotron-->
+
+<p ng-show="mensagem.length" class="alert alert-info">
+    {{mensagem}}
+</p>
+
 <!--
     pequena alteração no src e no alt para começar a enteder como o Angular fornece os dados para a nossa view
     e como a mesma se constrói apartir desses dados.
@@ -79,6 +84,14 @@
 
      <meu-painel class="col-md-2 painel-animado" ng-repeat="foto in fotos | filter: filtro" titulo="{{foto.titulo}}">
             <minha-foto url="{{foto.url}}" alt="{{foto.titulo}}"></minha-foto>
+
+            <a class="btn btn-primary btn-block" href="/fotos/edit/{{foto._id}}">Editar</a>
+            <!--
+                desta forma saberemos qual foto será excluida....pois estamos passando
+                foto como parametro da função remover
+            -->
+            <button class="btn btn-danger btn-block" ng-click="remover(foto)">Remover</button>
+
      </meu-painel>
     
 </div> <!--row-->

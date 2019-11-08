@@ -36,6 +36,7 @@ angular.module('alurapic').controller('FotosController',function($scope,$http){
 	*/
 	$scope.fotos = [];
 	$scope.filtro = '';
+	$scope.mensagem = '';
 
 	/*
 		para obter dados como mencionado, sabemos que podemos usar a função get..
@@ -62,12 +63,37 @@ angular.module('alurapic').controller('FotosController',function($scope,$http){
 			nao precisa retornar o retorno.data, como demonstramos a baixo...
 	*/
 	.success(function(retorno){
-		console.log(retorno);
 		$scope.fotos = retorno; //nao precisa ser retorno.data;
 	})
 	//.catch(function(erro){
 	.error(function(erro){
 		console.log(erro);
 	});
+
+	/*
+		ao remover a foto, ainda será preciso dar um refresh para ver a alteração..
+		poderiamos solicitar novamente a lista de fotos do servidor, mas estaríamos 
+		realizando uma requisição extra e evitar isso é uma ótima ideia, ainda mais
+		se caso estivermos acessando uma rede móvel de alta latência...
+
+		desta forma...
+		que tal remover a foto da lista quando a operação de remover for bem sucedida?
+		assim evitaria uma requisição a mais...
+		Como $scope.fotos nada mais é que um array, podemos usar a função splice para remover
+
+	*/
+
+	$scope.remover = function(foto){
+		$http.delete('/v1/fotos/' + foto._id)
+		.success(function() {
+			var indiceDaFoto = $scope.fotos.indexOf(foto);
+			$scope.fotos.splice(indiceDaFoto, 1);
+			$scope.mensagem = 'Foto ' + foto.titulo + 'removida com sucesso!';
+		})
+		.error(function(erro){
+			console.log(erro);
+			$scope.mensagem = 'Não foi possível apagar a foto ' + foto.titulo;
+		});
+	};
 
 });

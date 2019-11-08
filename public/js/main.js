@@ -90,6 +90,12 @@ angular.module('alurapic', ['minhasDiretivas','ngAnimate','ngRoute'])
 		controller: 'FotoController'
 	});
 
+	$routeProvider.when('/fotos/edit/:fotoId', {
+		/* associação de FotoController à view parcial foto.html */
+		templateUrl: 'partials/foto.html',
+		controller: 'FotoController'
+	});
+
 	//ao inserir qualquer endereço inexistente...'jogar' o usuario para a pagina fotos(index)
 	$routeProvider.otherwise({redirectTo: '/fotos'});
 });
